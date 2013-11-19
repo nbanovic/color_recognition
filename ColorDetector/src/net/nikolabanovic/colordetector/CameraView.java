@@ -1,11 +1,9 @@
 package net.nikolabanovic.colordetector;
 
-import java.io.FileOutputStream;
-
 import org.opencv.android.JavaCameraView;
 
 import android.content.Context;
-import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -30,5 +28,17 @@ public class CameraView extends JavaCameraView {
 
         // PictureCallback is implemented by the current class
         mCamera.takePicture(null, null, callback);
+    }
+    
+    public void turnFlashlightOn() {
+    	Parameters p = mCamera.getParameters();
+    	p.setFlashMode(Parameters.FLASH_MODE_TORCH);
+    	mCamera.setParameters(p);
+    }
+    
+    public void turnFlashlightOff() {
+    	Parameters p = mCamera.getParameters();
+    	p.setFlashMode(Parameters.FLASH_MODE_OFF);
+    	mCamera.setParameters(p);
     }
 }
